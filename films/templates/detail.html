@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ film.title }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #141414;
+            color: white;
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        h1 {
+            color: #e50914;
+        }
+        .film-detail {
+            display: flex;
+            gap: 30px;
+            margin-top: 20px;
+        }
+        .film-detail img {
+            width: 300px;
+            border-radius: 8px;
+        }
+        .film-info {
+            flex: 1;
+        }
+        .category {
+            background-color: #e50914;
+            padding: 5px 15px;
+            border-radius: 5px;
+            display: inline-block;
+            margin: 10px 0;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #e50914;
+            text-decoration: none;
+        }
+        button {
+            background-color: #e50914;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        button:hover {
+            background-color: #f40612;
+        }
+    </style>
+</head>
+<body>
+    <a href="/" class="back-link">← Retour au catalogue</a>
+    
+    <h1>{{ film.title }}</h1>
+    
+    <div class="film-detail">
+        <img src="{{ film.image }}" alt="{{ film.title }}">
+        
+        <div class="film-info">
+            <p><strong>Année :</strong> {{ film.year }}</p>
+            <span class="category">{{ film.category.name }}</span>
+            <p>{{ film.description }}</p>
+            
+            <form method="POST" action="/add_favorite/{{ film.id }}/">
+                {% csrf_token %}
+                <button type="submit">⭐ Ajouter aux favoris</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
